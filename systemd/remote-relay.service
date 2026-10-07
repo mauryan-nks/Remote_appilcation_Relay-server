@@ -1,3 +1,5 @@
+$use your own relay service name for p2p
+
 [Unit]
 Description=Vismrit Remote Relay Server
 After=network-online.target
