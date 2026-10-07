@@ -1,0 +1,24 @@
+[Unit]
+Description=Vismrit Remote Signal Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/www/wwwroot/remote.vismrit.tech/goServer
+ExecStart=/www/wwwroot/remote.vismrit.tech/goServer/bin/remote-signal \
+  -addr 0.0.0.0:45991 \
+  -api https://remote.vismrit.tech \
+  -cert /www/server/panel/vhost/cert/remote.vismrit.tech/fullchain.pem \
+  -key /www/server/panel/vhost/cert/remote.vismrit.tech/privkey.pem
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=5
+KillMode=control-group
+KillSignal=SIGTERM
+SendSIGKILL=yes
+LimitNOFILE=1048576
+
+[Install]
+WantedBy=multi-user.target
